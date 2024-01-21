@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/21 18:13:18 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/21 18:22:56 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,23 @@ void		minishell(int ac, char **av, char **envp);
 
 // UTILS
 int			is_space(int c);
-
+char		**get_paths(char **envp);
+void		*ft_memcpy(void *dest, const void *src, size_t n);
+char		*ft_strcat(char *dest, const char *src);
+char		*ft_strchr(const char *s, int c);
+int			ft_strcmp(char *s1, char *s2);
+int			ft_isalnum(int c);
+char		*ft_strcpy(char *dest, const char *src);
+char		*ft_strdup(const char *src);
+size_t		ft_strlen(char const *s);
+char		*ft_strndup(const char *s1, size_t n);
+int			ft_strncmp(const char *s1, const char *s2, unsigned int n);
+void		ft_putchar(char c);
+void		ft_putchar_fd(char c, int fd);
+void		ft_putendl_fd(char *s, int fd);
+char		*ft_strpbrk(const char *str, const char *accept);
+size_t		ft_strspn(const char *str, const char *accept);
+char		*ft_strtok(char *str, const char *delim);
+void		*ft_memset(void *b, int c, size_t len);
 
 #endif
