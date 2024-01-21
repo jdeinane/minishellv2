@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/21 17:55:05 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/21 18:13:18 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,20 @@ extern int	g_status_code;
 char		**copy_env(char **envp);
 
 // INIT
-t_data		*init_data(char **envp);
-t_commands	*init_commands(void);
+bool		*init_data(t_data *data, char **envp);
+void		init_commands(t_data *data, t_commands *cmds);
+void		init_io(t_commands *cmds);
+void		init_pipe(t_commands *cmds);
+
+// LEXER
+char		*trim_input(const char *input);
 
 // MAIN
 int			main(int ac, char **av, char **envp);
 void		minishell(int ac, char **av, char **envp);
+
+// UTILS
+int			is_space(int c);
+
 
 #endif

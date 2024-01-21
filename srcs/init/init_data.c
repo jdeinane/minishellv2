@@ -6,22 +6,49 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 17:37:49 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/21 17:39:27 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/21 18:13:30 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_data	*init_data(char **envp)
+static bool	init_env(t_data *data, char **envp)
 {
-	t_data	*data;
+	int	i;
 
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (NULL);
-	data->env = copy_env(envp);
+	data->env = ft_calloc(env_var_count(envp) + 1, sizeof * data->env);
+	if (!data->env)
+		return (false);
+	i = 0;
+	while (envp[i])
+	{
+		data->env[i] = ft_strdup(envp[i]);
+		i++;
+	}
+	return (true);
+}
+
+bool	init_path(t_data *data)
+{
+	char	path[MAX_PATH];
+	char	*cwd;
+
+	cwd = getcwd(path, MAX_PATH);
+	data->work_dir = ft_strdup(cwd);
+	if (!data->work_dir)
+		return (false);
+	if (get_env_var_index(data->env, OLD_PWD) != -1)
+		data->old_work_dir = ft_strdup(get_env_var_value(data->env, OLD_PWD));
+	else
+		data->old_work_dir = ft_strdup(cwd);
+	return (true);
+}
+
+bool	*init_data(t_data *data, char **envp)
+{
+	if (!init_envp(data, envp))
+		return (false);
+	if (!init_path(data))
+		return (false);
 	data->user_input = NULL;
-	data->work_dir = NULL;
-	data->old_work_dir = NULL;
-	return (data);
 }
