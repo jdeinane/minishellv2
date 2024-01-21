@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/21 18:22:56 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/21 18:35:14 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,13 @@ extern int	g_status_code;
 
 // ENV
 char		**copy_env(char **envp);
+int			env_var_count(char **envp);
+int			get_env_var_index(char **envp, char *var_name);
 
 // INIT
 bool		*init_data(t_data *data, char **envp);
 void		init_commands(t_data *data, t_commands *cmds);
-void		init_io(t_commands *cmds);
+void		init_redirections(t_commands *cmds);
 void		init_pipe(t_commands *cmds);
 
 // LEXER
@@ -138,5 +140,6 @@ char		*ft_strpbrk(const char *str, const char *accept);
 size_t		ft_strspn(const char *str, const char *accept);
 char		*ft_strtok(char *str, const char *delim);
 void		*ft_memset(void *b, int c, size_t len);
+void		*ft_calloc(size_t nmemb, size_t size);
 
 #endif
