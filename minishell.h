@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 15:43:15 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:19:03 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 # include <string.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
@@ -148,5 +149,7 @@ size_t		ft_strspn(const char *str, const char *accept);
 char		*ft_strtok(char *str, const char *delim);
 void		*ft_memset(void *b, int c, size_t len);
 void		*ft_calloc(size_t nmemb, size_t size);
+int			ft_isdigit(int c);
+bool		is_numeric(const char *str);
 
 #endif

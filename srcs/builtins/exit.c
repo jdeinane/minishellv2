@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_trucnuche.c                                     :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 13:36:43 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 16:07:38 by jubaldo          ###   ########.fr       */
+/*   Created: 2024/01/22 16:07:50 by jubaldo           #+#    #+#             */
+/*   Updated: 2024/01/22 16:10:24 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	is_space(int c)
+int	builtin_exit(char **av, int last_exit_status)
 {
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\r'
-		|| c == '\v' || c == '\f')
-		return (c);
-	return (0);
-}
+	long	status;
 
-bool	is_numeric(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
+	if (av[1] == NULL)
+		exit(last_exit_status);
+	if (!is_numeric(av[1]))
 	{
-		if (!ft_isdigit(str[i]))
-			return (false);
-		i++;
+		write(STDERR_FILENO, "exit: numeric argument required\n", 32);
+		exit(255);
 	}
-	return (true);
+	status = ft_strtol(av[1], NULL, 10);
+	if (status < 0 || status > 255)
+		status = (unsigned char) status;
+	exit((int)status);
 }

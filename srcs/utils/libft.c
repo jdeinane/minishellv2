@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:51:34 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/11 13:44:23 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:10:59 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,11 @@ int	ft_isalnum(int c)
 		return (1);
 	else
 		return (0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		 return (1);
+	return (0);
 }
