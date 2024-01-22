@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:36:43 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 16:07:38 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/22 18:12:06 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@ int	is_space(int c)
 		|| c == '\v' || c == '\f')
 		return (c);
 	return (0);
+}
+
+bool	is_digit2(char c, int base)
+{
+	if (base <= 10)
+		return (c >= '0' && c < '0' + base);
+	else
+	{
+		if ((c >= '0' && c <= '9')
+			|| (c >= 'a' && c < 'a' + base - 10)
+			|| (c >= 'A' && c < 'A' + base - 10))
+			return (true);
+		else
+			return (false);
+	}
 }
 
 bool	is_numeric(const char *str)

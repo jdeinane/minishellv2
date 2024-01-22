@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 16:19:03 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/22 18:15:53 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,7 @@ char		*trim_input(const char *input);
 int			main(int ac, char **av, char **envp);
 void		minishell(int ac, char **av, char **envp);
 
-// UTILS
-int			is_space(int c);
-char		**get_paths(char **envp);
+// LIBFT
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 char		*ft_strcat(char *dest, const char *src);
 char		*ft_strchr(const char *s, int c);
@@ -150,6 +148,12 @@ char		*ft_strtok(char *str, const char *delim);
 void		*ft_memset(void *b, int c, size_t len);
 void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_isdigit(int c);
+long		ft_strtol(const char *str, char **endptr, int base);
+
+// UTILS
+int			is_space(int c);
+char		**get_paths(char **envp);
 bool		is_numeric(const char *str);
+bool		is_digit2(char c, int base);
 
 #endif

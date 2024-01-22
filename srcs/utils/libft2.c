@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:52:25 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 16:18:42 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/22 17:49:12 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,35 +85,4 @@ int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
 		i++;
 	}
 	return (0);
-}
-
-long	ft_strtol(const char *str, char **endptr, int base)
-{
-	long	result;
-	bool	neg;
-	int		digit;
-
-	result = 0;
-	neg = false;
-	while (is_space(*str))
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		neg = (*str == '-');
-		str++;
-	}
-	while (*str && is_digit(*str))
-	{
-		digit = *str - '0';
-		if (result > (LONG_MAX - digit) / base)
-		{
-			result = neg ? LONG_MIN : LONG_MAX;
-			break ;
-		}
-		result = result * base + digit;
-		str++;
-	}
-	if (endptr != NULL)
-		*endptr = (char *)str;
-	return (neg ? -result : result);
 }
