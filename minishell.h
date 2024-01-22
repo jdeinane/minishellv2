@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 18:25:05 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 00:16:10 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,17 @@ void		init_pipe(t_commands *cmds);
 
 // LEXER
 char		*trim_input(const char *input);
+char		**tokenize_input(const char *input, t_commands *cmds);
+bool		is_quote(char c);
+bool		is_operator(char c);
+bool		is_env_var(char c);
+char		**convert_tokens_to_cmds(t_tokenizer *tokenizer);
+int			count_tokens(const t_tokenizer *tokenizer);
+char		*get_token(const t_tokenizer *tokenizer, int index);
+void		advance_tokenizer(t_tokenizer *tokenizer);
+bool		more_tokens_available(const t_tokenizer *tokenizer);
+char		current_char(const t_tokenizer *tokenizer);
+void		handle_quotes(t_tokenizer *tokenizer);
 
 // MAIN
 int			main(int ac, char **av, char **envp);
@@ -164,5 +175,6 @@ bool		check_args(int ac, char **av);
 void		exit_minishell(t_data *data, int status_code);
 bool		input_handler(t_data *data);
 char		*get_prompt(void);
+int			skip_whitespace(const char *str);
 
 #endif

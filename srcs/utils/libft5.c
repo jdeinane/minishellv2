@@ -6,13 +6,13 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:49:19 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 18:16:57 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/22 23:14:33 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static int	skip_whitespace(const char *str)
+int	skip_whitespace(const char *str)
 {
 	int	i;
 
