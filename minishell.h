@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 18:15:53 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/22 18:25:05 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,10 +150,19 @@ void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_isdigit(int c);
 long		ft_strtol(const char *str, char **endptr, int base);
 
+// SIGNALS
+void		signals_wait_cmd(void);
+void		signals_run_cmd(void);
+
+
 // UTILS
 int			is_space(int c);
 char		**get_paths(char **envp);
 bool		is_numeric(const char *str);
 bool		is_digit2(char c, int base);
+bool		check_args(int ac, char **av);
+void		exit_minishell(t_data *data, int status_code);
+bool		input_handler(t_data *data);
+char		*get_prompt(void);
 
 #endif
