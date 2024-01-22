@@ -6,13 +6,13 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:50:55 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/21 19:13:08 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/21 19:17:19 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int		set_env_var(char **envp, const char *name, const char *value)
+int	set_env_var(char **envp, const char *name, const char *value)
 {
 	int		index;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/21 19:00:52 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/22 15:43:15 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_tokenizer
 extern int	g_status_code;
 
 // BUILTINS
+int	builtin_cd(char **av, char **envp);
 
 
 // ENV
@@ -111,6 +112,7 @@ int			env_var_count(char **envp);
 int			get_env_var_index(char **envp, char *var_name);
 char		*get_env_var(char **envp, char *var_name);
 int			set_env_var(char **envp, const char *name, const char *value);
+int			unset_env_var(char **envp, const char *var_name);
 
 // INIT
 bool		*init_data(t_data *data, char **envp);

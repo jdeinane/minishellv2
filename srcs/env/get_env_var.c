@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:26:52 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/21 18:50:15 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/22 15:06:46 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 int	get_env_var_index(char **envp, char *var_name)
 {
-	int	i;
-	int	len;
-
-	len = ft_strlen(var_name);
-	i = 0;
+	int (i) = 0;
+	int (len) = ft_strlen(var_name);
 	if (envp == NULL || var_name == NULL)
 		return (-1);
 	while (envp[i] != NULL)
@@ -48,7 +45,9 @@ char	*get_env_var_value(char **envp, char *var_name)
 char	*get_env_var(char **envp, char *var_name)
 {
 	size_t	len;
+	int		i;
 
+	i = 0;
 	len = ft_strlen(var_name);
 	while (envp[i] != NULL)
 	{
