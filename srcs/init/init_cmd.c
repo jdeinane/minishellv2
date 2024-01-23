@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_pipes.c                                     :+:      :+:    :+:   */
+/*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 18:31:22 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 21:42:55 by jubaldo          ###   ########.fr       */
+/*   Created: 2024/01/23 21:49:05 by jubaldo           #+#    #+#             */
+/*   Updated: 2024/01/23 21:56:10 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	create_pipes(t_commands *cmds, int index)
+void	init_cmd(t_cmd *cmd)
 {
-	if (index == 0)
-		check_pipes(cmds, index);
-	else
+	int	i;
+
+	i = 0;
+	if (!cmd)
+		return ;
+	cmd->path = NULL;
+	cmd->args = malloc(sizeof(char *) * (MAX_ARGS + 1));
+	if (!cmd->args)
+		return ;
+	while (i <= MAX_ARGS)
 	{
-		if (cmds->operators[index])
-			check_pipes(cmds, index);
-		if (cmds->operators[index - 1] == '|')
-			dup2(cmds->pipe[index].fd[0], STDIN);
+		cmd->args[i] = NULL;
+		i++;
 	}
-	close_pipes(cmds);
+	cmd->redirections = malloc(sizeof(char*) * MAX_REDIRECTIONS);
+	if (!cmd->redirections)
+	{
+		free(cmd->args);
+		return ;
+	}
+	i = 0;
+	while (i < MAX_REDIRECTIONS)
+		cmd->redirections[i++] = NULL;
 }

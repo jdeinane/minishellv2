@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 17:37:49 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/21 18:13:30 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 21:36:31 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool	init_path(t_data *data)
 
 bool	*init_data(t_data *data, char **envp)
 {
-	if (!init_envp(data, envp))
+	if (!init_env(data, envp))
 		return (false);
 	if (!init_path(data))
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:37:25 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 15:46:23 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 19:45:04 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	builtin_unset(char **av, char **envp)
 		if (unset_env_var(&envp, av[i]) != 0)
 		{
 			error_msg = "unset: failed to unset variable\n";
-			write(STDERR_FILENO, error_msg, ft_strlen(error_msg));
+			write(STDERR, error_msg, ft_strlen(error_msg));
 			return (1);
 		}
 	}
