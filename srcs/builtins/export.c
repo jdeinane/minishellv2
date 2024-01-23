@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:24:33 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 15:37:50 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 19:01:47 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	export(char **av, char **envp)
 	{
 		while (envp[i] != NULL)
 		{
-			write(STDOUT_FILENO, "declare -x ", 11);
-			write(STDOUT_FILENO, envp[i], ft_strlen(envp[i]));
-			write(STDOUT_FILENO, "\n", 1);
+			write(STDOUT, "declare -x ", 11);
+			write(STDOUT, envp[i], ft_strlen(envp[i]));
+			write(STDOUT, "\n", 1);
 			i++;
 		}
 		return (0);
@@ -41,14 +41,14 @@ int	export(char **av, char **envp)
 			if (set_env_var(envp, name, value))
 			{
 				error_msg = "export: Error setting variable\n";
-				write(STDERR_FILENO, error_msg, ft_strlen(error_msg));
+				write(STDERR, error_msg, ft_strlen(error_msg));
 				return (1);
 			}
 		}
 		else
 		{
 			error_msg = "export: not a valid identifier\n";
-			write(STDERR_FILENO, error_msg, ft_strlen(error_msg));
+			write(STDERR, error_msg, ft_strlen(error_msg));
 			return (1);
 		}
 		i++;
