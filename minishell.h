@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 11:24:26 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 16:29:27 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,12 @@ void		handle_quotes(t_tokenizer *tokenizer);
 void		handle_operators(t_tokenizer *tokenizer);
 void		add_token(t_tokenizer *tokenizer, const char *start, int len);
 void		handle_env_variables(t_tokenizer *tokenizer);
-	
+
+// REDIRECTIONS
+int			handle_input(t_commands *cmds, char *part);
+void		handle_heredoc(t_commands *cmds, char *part);
+
+
 // LIBFT
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 char		*ft_strcat(char *dest, const char *src);
@@ -164,6 +169,7 @@ void		*ft_memset(void *b, int c, size_t len);
 void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_isdigit(int c);
 long		ft_strtol(const char *str, char **endptr, int base);
+char		*ft_strtrim(char const *s1, char const *set);
 
 // SIGNALS
 void		signals_wait_cmd(void);
@@ -180,5 +186,8 @@ void		exit_minishell(t_data *data, int status_code);
 bool		input_handler(t_data *data);
 char		*get_prompt(void);
 int			skip_whitespace(const char *str);
+bool		clear_prev_input(t_redirect *io, bool in_file);
+void		free_ptr(void *ptr);
+void		free_str(char **str);
 
 #endif
