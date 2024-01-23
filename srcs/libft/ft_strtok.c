@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft4.c                                           :+:      :+:    :+:   */
+/*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:30:09 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/19 13:01:14 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 18:26:22 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,4 @@ char	*ft_strtok(char *str, const char *delim)
 	else
 		last = NULL;
 	return (token);
-}
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	unsigned char	*str;
-
-	str = (unsigned char *)b;
-	while (len)
-	{
-		*str = (unsigned char)c;
-		str++;
-		len--;
-	}
-	return (b);
 }
