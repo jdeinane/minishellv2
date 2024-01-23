@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:36:43 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 18:12:06 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 23:29:59 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,32 @@ bool	is_numeric(const char *str)
 		i++;
 	}
 	return (true);
+}
+
+bool	is_command(char **tokens, int token_index)
+{
+	if (token_index == 0)
+		return (true);
+	if (tokens[token_index - 1] && ft_strcmp(tokens[token_index - 1], "|") == 0)
+		return (true);
+	return (false);
+}
+
+bool	is_argument(char **tokens, int token_index, t_commands *cmds)
+{
+	if (token_index == 0)
+		return (false);
+	if (is_command(tokens, token_index - 1) || is_operator(tokens[token_index - 1]))
+		return (false);
+	if (is_redirection(tokens[token_index]))
+		return (false);
+	return (true);
+}
+
+bool	is_redirection(char *token)
+{
+	if (ft_strcmp(token, ">") == 0 || ft_strcmp(token, ">>") == 0 ||
+		ft_strcmp(token, "<") == 0 || ft_strmp(token, "<<") == 0)
+		return (true);
+	return (false);
 }
