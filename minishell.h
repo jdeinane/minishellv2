@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 18:15:51 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 18:40:52 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,13 @@ typedef struct s_tokenizer
 	int		size;
 }	t_tokenizer;
 
+typedef struct s_num_parenth
+{
+	int	first_p;
+	int	last_p;
+}	t_num_parenth;
+
+
 extern int	g_status_code;
 
 // MAIN
@@ -124,6 +131,7 @@ bool		*init_data(t_data *data, char **envp);
 void		init_commands(t_data *data, t_commands *cmds);
 void		init_redirections(t_commands *cmds);
 void		init_pipe(t_commands *cmds);
+void		init_parenth(int *i, t_num_parenth *num_p);
 t_tokenizer	*init_tokenizer(const char *input);
 
 // LEXER
@@ -142,6 +150,11 @@ void		handle_quotes(t_tokenizer *tokenizer);
 void		handle_operators(t_tokenizer *tokenizer);
 void		add_token(t_tokenizer *tokenizer, const char *start, int len);
 void		handle_env_variables(t_tokenizer *tokenizer);
+
+// PIPES
+void		create_pipes(t_commands *cmds, int index);
+void		check_pipes(t_commands *cmds, int index);
+void		close_pipes(t_commands *cmds);
 
 // REDIRECTIONS
 int			handle_input(t_commands *cmds, char *part);
