@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 00:16:10 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 11:24:26 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,21 @@ typedef struct s_tokenizer
 {
 	char	**tokens;
 	char	*start;
+	char	*input;
 	char	current_quote;
 	bool	in_quote;
+	bool	error;
 	int		count;
 	int		size;
 }	t_tokenizer;
 
 extern int	g_status_code;
 
+// MAIN
+
+
 // BUILTINS
 int	builtin_cd(char **av, char **envp);
-
 
 // ENV
 char		**copy_env(char **envp);
@@ -120,6 +124,7 @@ bool		*init_data(t_data *data, char **envp);
 void		init_commands(t_data *data, t_commands *cmds);
 void		init_redirections(t_commands *cmds);
 void		init_pipe(t_commands *cmds);
+t_tokenizer	*init_tokenizer(const char *input);
 
 // LEXER
 char		*trim_input(const char *input);
@@ -134,11 +139,10 @@ void		advance_tokenizer(t_tokenizer *tokenizer);
 bool		more_tokens_available(const t_tokenizer *tokenizer);
 char		current_char(const t_tokenizer *tokenizer);
 void		handle_quotes(t_tokenizer *tokenizer);
-
-// MAIN
-int			main(int ac, char **av, char **envp);
-void		minishell(int ac, char **av, char **envp);
-
+void		handle_operators(t_tokenizer *tokenizer);
+void		add_token(t_tokenizer *tokenizer, const char *start, int len);
+void		handle_env_variables(t_tokenizer *tokenizer);
+	
 // LIBFT
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 char		*ft_strcat(char *dest, const char *src);

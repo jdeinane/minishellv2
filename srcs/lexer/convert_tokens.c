@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 23:29:12 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 23:48:28 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 11:23:46 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ char	**convert_tokens_to_cmds(t_tokenizer *tokenizer)
 	int	(num_tokens) = count_tokens(tokenizer);
 	char (**cmds) = malloc(sizeof(char *) * (num_tokens + 1));
 	if (!cmds)
+	{
+		g_status_code = 1;
 		return (NULL);
+	}
 	while (i < num_tokens)
 	{
 		cmds[i] = ft_strdup(get_token(tokenizer, i));
@@ -59,6 +62,7 @@ char	**convert_tokens_to_cmds(t_tokenizer *tokenizer)
 				j++;
 			}
 			free(cmds);
+			g_status_code = 1;
 			return (NULL);
 		}
 		i++;
