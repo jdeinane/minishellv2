@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:33:17 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 18:40:07 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 18:42:33 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	check_parenthesis(t_commands *cmds, int index)
 	while (i < cmds->num_cmds)
 	{
 		j = 0;
-		while (cmds->[i][j++] == "(")
+		while (cmds->cmds[i][j++] == "(")
 			num_p.first_p++;
 		while (cmds->cmds[i][j])
 		{
