@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 16:29:27 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/23 18:15:51 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,13 @@ void		handle_env_variables(t_tokenizer *tokenizer);
 
 // REDIRECTIONS
 int			handle_input(t_commands *cmds, char *part);
+int			handle_output(t_commands *cmds, char *part, bool trunc);
 void		handle_heredoc(t_commands *cmds, char *part);
+bool		is_redirection_cmd(t_commands *cmds, int i);
+void		handle_redirections(t_commands *cmds, int j);
+void		redirect_io(t_redirect *io, int index_cmd);
+void		restore_io(t_redirect *io);
+bool		check_file(t_redirect *io, t_commands *cmds, bool free);
 
 
 // LIBFT
@@ -189,5 +195,9 @@ int			skip_whitespace(const char *str);
 bool		clear_prev_input(t_redirect *io, bool in_file);
 void		free_ptr(void *ptr);
 void		free_str(char **str);
+void		close_fds(t_commands *cmds, bool reset_io);
+void		free_cmds(t_commands *cmds);
+void		free_io(t_redirect *io);
+
 
 #endif
