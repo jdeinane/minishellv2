@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 23:29:12 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 11:23:46 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/24 23:37:08 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,32 @@ char	*get_token(const t_tokenizer *tokenizer, int index)
 	return (NULL);
 }
 
-char	**convert_tokens_to_cmds(t_tokenizer *tokenizer)
+bool	convert_tokens_to_cmds(t_commands *cmds, char **parsed_cmds)
 {
 	int (i) = 0;
 	int (j) = 0;
-	int	(num_tokens) = count_tokens(tokenizer);
-	char (**cmds) = malloc(sizeof(char *) * (num_tokens + 1));
-	if (!cmds)
+	cmds->cmds = malloc(sizeof(char *) * (cmds->num_cmds + 1));
+	if (!cmds->cmds)
 	{
 		g_status_code = 1;
-		return (NULL);
+		return (false);
 	}
-	while (i < num_tokens)
+	while (parsed_cmds[i] != NULL)
 	{
-		cmds[i] = ft_strdup(get_token(tokenizer, i));
-		if (!cmds[i])
+		cmds->cmds[i] = ft_strdup(parsed_cmds[i]);
+		if (!cmds->cmds[i])
 		{
 			while (j < i)
 			{
-				free(cmds[j]);
+				free(cmds->cmds[j]);
 				j++;
 			}
-			free(cmds);
+			free(cmds->cmds);
 			g_status_code = 1;
-			return (NULL);
+			return (false);
 		}
 		i++;
 	}
-	cmds[num_tokens] = NULL;
-	return (cmds);
+	cmds->cmds[cmds->num_cmds] = NULL;
+	return (true);
 }

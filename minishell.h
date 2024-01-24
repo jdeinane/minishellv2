@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/24 21:34:52 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/24 23:44:15 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,12 @@ extern int	g_status_code;
 
 
 // BUILTINS
-int	builtin_cd(char **av, char **envp);
+int			builtin_cd(char **av, char **envp);
+
+// EXEC
+int			execute_builtin(t_commands *cmds, char **envp, int last_exit_status);
+int			execute_external(t_commands *cmds, char **envp);
+void		execute(t_commands *cmds, char **envp, int last_exit_status);
 
 // ENV
 char		**copy_env(char **envp);
@@ -142,7 +147,7 @@ char		**tokenize_input(const char *input, t_commands *cmds);
 bool		is_quote(char c);
 bool		is_operator(char c);
 bool		is_env_var(char c);
-char		**convert_tokens_to_cmds(t_tokenizer *tokenizer);
+bool		convert_tokens_to_cmds(t_commands *cmds, char **parsed_cmds);
 int			count_tokens(const t_tokenizer *tokenizer);
 char		*get_token(const t_tokenizer *tokenizer, int index);
 void		advance_tokenizer(t_tokenizer *tokenizer);
@@ -154,6 +159,7 @@ void		add_token(t_tokenizer *tokenizer, const char *start, int len);
 void		handle_env_variables(t_tokenizer *tokenizer);
 
 // PARSER
+void		parse_input(t_data *data);
 
 // PIPES
 void		create_pipes(t_commands *cmds, int index);

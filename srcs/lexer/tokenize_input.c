@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:14:38 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 11:21:37 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/24 23:08:20 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**tokenize_input(const char *input, t_commands *cmds)
 		advance_tokenizer(tokenizer);
 	}
 	if (!tokenizer->error)
-		tokens = convert_tokens_to_cmds(tokenizer);
+		tokens = convert_tokens_to_cmds(tokenizer, cmds);
 	else
 		g_status_code = 1;
 	free_tokenizer(tokenizer);
