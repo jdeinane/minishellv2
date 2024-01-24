@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:36:43 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 23:29:59 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/24 12:01:25 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,11 @@ bool	is_redirection(char *token)
 		ft_strcmp(token, "<") == 0 || ft_strmp(token, "<<") == 0)
 		return (true);
 	return (false);
+}
+
+bool	is_pipe(const char *token)
+{
+	if (token == NULL)
+		return (false);
+	return (ft_strcmp(token, "|") == 0);
 }

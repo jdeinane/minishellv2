@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 23:36:43 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/24 21:34:52 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,6 @@ void		add_token(t_tokenizer *tokenizer, const char *start, int len);
 void		handle_env_variables(t_tokenizer *tokenizer);
 
 // PARSER
-void		parse_commands(t_commands *cmds, t_tokenizer *tokenizer);
-void		add_arg_to_cmd(t_cmd *cmd, const char *arg);
 
 // PIPES
 void		create_pipes(t_commands *cmds, int index);
@@ -220,5 +218,6 @@ void		free_cmds(t_commands *cmds);
 void		free_io(t_redirect *io);
 bool		is_argument(char **tokens, int token_index, t_commands *cmds);
 bool		is_redirection(char *token);
+bool		is_pipe(const char *token);
 
 #endif
