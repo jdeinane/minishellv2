@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/25 17:16:04 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:37:09 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,5 +243,6 @@ void		free_io(t_redirect *io);
 bool		is_argument(char **tokens, int token_index, t_commands *cmds);
 bool		is_redirection(char *token);
 bool		is_pipe(const char *token);
+void		free_data(t_data *data, bool exit_shell);
 
 #endif

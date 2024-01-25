@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:11:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/24 00:09:48 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:41:18 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	free_cmd(t_commands *cmds)
 		free(cmds->cmd[i].path);
 		i++;
 	}
-	free_io(cmds);
+	free_io(cmds->io);
 	free(cmds->cmd);
 }
 
@@ -57,8 +57,8 @@ void	free_cmds(t_commands *cmds)
 	int (i) = 0;
 	if (cmds->cmds != NULL)
 	{
-		free_cmd(cmds->cmds);
-		free_pipes(cmds->cmds);
+		free_cmd(cmds);
+		free_pipes(cmds);
 		while (cmds->cmds[i] != NULL)
 			free(cmds->cmds[i++]);
 		free(cmds->cmds[i]);
@@ -144,4 +144,23 @@ bool	clear_prev_input(t_redirect *io, bool in_file)
 		close(io->fd_out);
 	}
 	return (true);
+}
+
+void	free_data(t_data *data, bool exit_shell)
+{
+	if (data)
+	{
+		if (data->user_input)
+			free_ptr(data->user_input);
+		if (exit_shell)
+		{
+			if (data->old_work_dir)
+				free_ptr(data->old_work_dir);
+			if (data->work_dir)
+				free_ptr(data->work_dir);
+			if (data->env)
+				free_str(data->env);
+			rl_clear_history();
+		}
+	}
 }
