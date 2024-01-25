@@ -6,11 +6,27 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:15:05 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 21:42:41 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:23:58 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+static int	open_outfile(t_commands *cmds, char *file, bool trunc)
+{
+	cmds->io->out_file = file;
+	if (cmds->io->out_file && cmds->io->out_file[0] != '\0')
+		return (write(STDERR_FILENO, "Error: Invalid output redirection\n", 34), -1);
+	if (trunc == true)
+		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT
+							| O_TRUNC, 0644);
+	else
+		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT
+							| O_APPEND, 0644);
+	if (cmds->io->fd_out == -1)
+		return (write(STDERR_FILENO, "Error: Invalid output redirection\n", 34), -1);
+	return (0);
+}
 
 int	handle_output(t_commands *cmds, char *part, bool trunc)
 {
@@ -28,20 +44,4 @@ int	handle_output(t_commands *cmds, char *part, bool trunc)
 	else
 		cmds->io->error = false;
 	return (status_code);
-}
-
-static int	open_outfile(t_commands *cmds, char *file, bool trunc)
-{
-	cmds->io->out_file = file;
-	if (cmds->io->out_file && cmds->io->out_file[0] != '\0')
-		return (write(STDERR_FILENO, "Error: Invalid output redirection\n", 34), -1);
-	if (trunc == true)
-		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT
-							| O_TRUNC, 0644);
-	else
-		cmds->io->fd_out = open(cmds->io->out_file, O_WRONLY | O_CREAT
-							| O_APPEND, 0644);
-	if (cmds->io->fd_out = -1)
-		return (write(STDERR_FILENO, "Error: Invalid output redirection\n", 34), -1);
-	return (0);
 }

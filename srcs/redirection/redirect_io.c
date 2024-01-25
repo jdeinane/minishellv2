@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:54:00 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 21:42:45 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:28:59 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,31 @@ void	redirect_io(t_redirect *io, int index_cmd)
 		return ;
 	io->stdin_backup = dup(STDIN_FILENO);
 	if (io->stdin_backup == -1)
-		return (perror("dup"));
+	{
+		perror("dup");
+		return ;
+	}
 	io->stdout_backup = dup(STDOUT_FILENO);
 	if (io->stdout_backup == -1)
-		return (perror("dup"));
+	{
+		return ;
+		perror("dup");
+	}
 	if(io->fd_in != -1)
 	{
 		if (dup2(io->fd_in, STDIN_FILENO) == -1)
-			return (perror("dup2"), EXIT_FAILURE);
+		{
+			perror("dup2");
+			return ;
+		}
 	}
 	if (io->fd_out != -1)
 	{
 		if (dup2(io->fd_out, STDOUT_FILENO) == -1)
-			return (perror("dup2"), EXIT_FAILURE);
+		{
+			perror("dup2");
+			return ;
+		}
 	}
 }
 
@@ -56,8 +68,8 @@ bool	check_file(t_redirect *io, t_commands *cmds, bool free)
 {
 	if (!io || (!io->in_file && !io->out_file))
 		return (true);
-	if (((io->in_file && io->fd_in == -1) || io->out_file && io->fd_out == -1)
-		&& io->error == true)
+	if ((io->in_file && io->fd_in == -1) || ((io->out_file && io->fd_out == -1)
+		&& io->error == true))
 	{
 		if (free)
 		{

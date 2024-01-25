@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/25 15:46:00 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:16:04 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ typedef struct s_num_parenth
 extern int	g_status_code;
 
 // MAIN
-
+void		minishell(int ac, char **av, char **envp);
+int			main(int ac, char **av, char **envp);
 
 // BUILTINS
 int			builtin_cd(char **av, char **envp);
@@ -128,7 +129,7 @@ int			builtin_unset(char **av, char **envp);
 // EXEC
 int			execute_builtin(t_commands *cmds, char **envp, int last_exit_status);
 int			execute_external(t_commands *cmds, char **envp);
-void		execute(t_commands *cmds, char **envp, int last_exit_status);
+int			execute(t_data *data);
 
 // ENV
 char		**copy_env(char **envp);
@@ -166,9 +167,12 @@ void		handle_regular_chars(t_tokenizer *tokenizer);
 void		handle_whitespace(t_tokenizer *tokenizer);
 void		add_token(t_tokenizer *tokenizer, const char *start, int len);
 void		handle_env_variables(t_tokenizer *tokenizer);
+char 		**get_parsed_cmds_from_tokens(t_tokenizer *tokenizer);
+void		free_parsed_cmds(char **parsed_cmds);
+void		free_tokenizer(t_tokenizer *tokenizer);
 
 // PARSER
-void		parse_input(t_data *data);
+t_commands	*parse_input(t_data *data);
 
 // PIPES
 void		create_pipes(t_commands *cmds, int index);
@@ -212,6 +216,7 @@ int			ft_isalpha(int c);
 char		**ft_split(char const *s, char c);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strncpy(char *dest, const char *src, unsigned int n);
+void		ft_putstr_fd(char *s, int fd);
 
 // SIGNALS
 void		signals_wait_cmd(void);

@@ -6,24 +6,22 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:23:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 21:42:37 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:19:42 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	handle_heredoc(t_commands *cmds, char *part)
+static bool	exit_heredoc_prompt(char **input, t_redirect *io)
 {
-	t_redirect	*io;
-
-	init_redirections(cmds);
-	io = cmds->io;
-	io->in_file = ".tmp_heredoc";
-	get_delimiter(part, io);
-	if (heredoc_prompt(io))
-		io->fd_in = open(io->in_file, O_RDONLY);
-	else
-		io->fd_in = -1;
+	if (*input == NULL)
+	{
+		ft_putendl_fd("Error: heredoc EOF not found", STDERR_FILENO);
+		return (true);
+	}
+	if (ft_strncmp(*input, io->heredoc_eof, ft_strlen(io->heredoc_eof)) == 0)
+		return (true);
+	return (false);
 }
 
 static bool	heredoc_prompt(t_redirect *io)
@@ -48,18 +46,6 @@ static bool	heredoc_prompt(t_redirect *io)
 	return (true);
 }
 
-static bool	exit_heredoc_prompt(char **input, t_redirect *io)
-{
-	if (*input == NULL)
-	{
-		ft_putendl_fd("Error: heredoc EOF not found", STDERR_FILENO);
-		return (true);
-	}
-	if (ft_strncmp(*input, io->heredoc_eof, ft_strlen(io->heredoc_eof)) == 0)
-		return (true);
-	return (false);
-}
-
 static void	get_delimiter(char *part, t_redirect *io)
 {
 	char	**part_split;
@@ -69,4 +55,18 @@ static void	get_delimiter(char *part, t_redirect *io)
 	result = ft_strtrim(part_split[0], " ");
 	io->heredoc_eof = result;
 	free_str(part_split);
+}
+
+void	handle_heredoc(t_commands *cmds, char *part)
+{
+	t_redirect	*io;
+
+	init_redirections(cmds);
+	io = cmds->io;
+	io->in_file = ".tmp_heredoc";
+	get_delimiter(part, io);
+	if (heredoc_prompt(io))
+		io->fd_in = open(io->in_file, O_RDONLY);
+	else
+		io->fd_in = -1;
 }
