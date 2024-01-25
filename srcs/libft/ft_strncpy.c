@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_whitespace.c                                :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 23:53:16 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/25 15:43:39 by jubaldo          ###   ########.fr       */
+/*   Created: 2024/01/25 15:17:40 by jubaldo           #+#    #+#             */
+/*   Updated: 2024/01/25 15:18:46 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	handle_whitespace(t_tokenizer *tokenizer)
+char	*ft_strncpy(char *dest, const char *src, unsigned int n)
 {
-	while (is_space(current_char(tokenizer)
-			&& more_tokens_available(tokenizer)))
-		advance_tokenizer(tokenizer);
+	unsigned int	i;
+
+	i = 0;
+	while (src[i] != '\0' && i < n)
+	{
+		dest[i] = src[i];
+		++i;
+	}
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
 }

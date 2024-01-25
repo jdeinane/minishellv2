@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:16:04 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 11:20:58 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 15:41:28 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	handle_regular_chars(t_tokenizer *tokenizer)
 	}
 	if (len > 0)
 	{
-		token = extract_token(tokenizer->input + start_index, len);
+		token = extract_token(tokenizer->input, start_index, len);
 		add_token(tokenizer, token, len);
 		free(token);
 	}

@@ -6,13 +6,43 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:24:33 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 19:36:17 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 13:35:42 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	export(char **av, char **envp)
+static bool	is_valid_env_var_name(const char *str)
+{
+	if (!str || !(*str == '_' || ft_isalpha(*str)))
+		return (false);
+	str++;
+	while (*str)
+	{
+		if (!(*str == '_' || ft_isalnum(*str)))
+			return (false);
+		str++;
+	}
+	return (true);
+}
+
+static int	display_all_env_vars(char **envp)
+{
+	int	i;
+
+	i = 0;
+	if (!envp)
+		return (1);
+	while (envp[i] != NULL)
+	{
+		write(STDOUT, "declare -x ", 11);
+		write(STDOUT, envp[i], ft_strlen(envp[i]));
+		write(STDOUT, "\n", 1);
+	}
+	return (0);
+}
+
+int	builtin_export(char **av, char **envp)
 {
 	int		i;
 	char	*name;
@@ -46,36 +76,6 @@ int	export(char **av, char **envp)
 			return (1);
 		}
 		i++;
-	}
-	return (0);
-}
-
-static bool	is_valid_env_var_name(const char *str)
-{
-	if (!str || !(*str == '_' || ft_isalpha(*str)))
-		return (false);
-	str++;
-	while (*str)
-	{
-		if (!(*str == '_' || ft_isalnum(*str)))
-			return (false);
-		str++;
-	}
-	return (true);
-}
-
-static int	display_all_env_vars(char **envp)
-{
-	int	i;
-
-	i = 0;
-	if (!envp)
-		return (1);
-	while (envp[i] != NULL)
-	{
-		write(STDOUT, "declare -x ", 11);
-		write(STDOUT, envp[i], ft_strlen(envp[i]));
-		write(STDOUT, "\n", 1);
 	}
 	return (0);
 }

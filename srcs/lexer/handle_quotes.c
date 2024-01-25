@@ -6,13 +6,11 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 23:55:43 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/23 13:48:42 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 15:22:42 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-extern int	g_status_code;
 
 void	handle_quotes(t_tokenizer *tokenizer)
 {
@@ -29,7 +27,7 @@ void	handle_quotes(t_tokenizer *tokenizer)
 	if (more_tokens_available(tokenizer) &&
 			current_char(tokenizer) == quote_type)
 	{
-		add_token(tokenizer, start_index, token_len);
+		add_token(tokenizer, tokenizer->input + start_index, token_len);
 		advance_tokenizer(tokenizer);
 	}
 	else

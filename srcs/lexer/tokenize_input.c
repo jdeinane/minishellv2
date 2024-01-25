@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:14:38 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/24 23:08:20 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 15:52:19 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	advance_tokenizer(t_tokenizer *tokenizer)
 char	**tokenize_input(const char *input, t_commands *cmds)
 {
 	t_tokenizer	*tokenizer;
+	char		**parsed_cmds;
 	char		**tokens;
 
 	tokens = NULL;
@@ -50,9 +51,22 @@ char	**tokenize_input(const char *input, t_commands *cmds)
 		advance_tokenizer(tokenizer);
 	}
 	if (!tokenizer->error)
-		tokens = convert_tokens_to_cmds(tokenizer, cmds);
+	{
+		parsed_cmds = get_parsed_cmds_from_tokens(tokenizer);
+		if (convert_tokens_to_cmds(cmds, parsed_cmds))
+			tokens = cmds->cmds;
+		else
+		{
+			tokens = NULL;
+			g_status_code = 1;
+		}
+		free_parsed_cmds(parsed_cmds);
+	}
 	else
+	{
 		g_status_code = 1;
+		tokens = NULL;
+	}
 	free_tokenizer(tokenizer);
 	return (tokens);
 }

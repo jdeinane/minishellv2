@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 23:29:12 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/24 23:37:08 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 15:43:04 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	count_tokens(const t_tokenizer *tokenizer)
 	num_tokens = 0;
 	while (*start != '\0')
 	{
-		if (!is_whitespace(*start))
+		if (!is_space(*start))
 		{
 			num_tokens++;
-			while (!is_whitespace(*start) && *start != '\0')
+			while (!is_space(*start) && *start != '\0')
 				start++;
 		}
 		else

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_whitespace.c                                :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 23:53:16 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/25 15:43:39 by jubaldo          ###   ########.fr       */
+/*   Created: 2024/01/25 13:26:49 by jubaldo           #+#    #+#             */
+/*   Updated: 2024/01/25 13:27:10 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	handle_whitespace(t_tokenizer *tokenizer)
+int	ft_isalpha(int c)
 {
-	while (is_space(current_char(tokenizer)
-			&& more_tokens_available(tokenizer)))
-		advance_tokenizer(tokenizer);
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	return (0);
 }

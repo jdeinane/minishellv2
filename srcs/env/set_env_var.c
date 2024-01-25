@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:50:55 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/21 19:17:19 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 13:31:07 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int	set_env_var(char **envp, const char *name, const char *value)
 {
 	int		index;
-	int		i;
+	size_t	i;
 	size_t	name_len;
 	size_t	value_len;
 	size_t	env_size;
 	char	**new_env;
 	char	*new_var;
 
-	index = get_env_var_index(*envp, name);
 	name_len = ft_strlen(name);
 	i = 0;
 	value_len = 0;
+	index = get_env_var_index(envp, name);
 	if (value != NULL)
 		value_len = ft_strlen(value);
 	new_var = malloc(name_len + value_len + 2);

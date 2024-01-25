@@ -6,13 +6,13 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:26:52 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/22 15:06:46 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 14:38:53 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	get_env_var_index(char **envp, char *var_name)
+int	get_env_var_index(char **envp, const char *var_name)
 {
 	int (i) = 0;
 	int (len) = ft_strlen(var_name);
@@ -28,17 +28,25 @@ int	get_env_var_index(char **envp, char *var_name)
 
 char	*get_env_var_value(char **envp, char *var_name)
 {
-	int		index;
-	char	*value_start;
+	int		i;
+	char	*tmp;
+	char	*result;
 
-	index = get_env_var_index(envp, var_name);
-	if (envp == NULL || var_name == NULL)
+	i = 0;
+	tmp = ft_strjoin(var_name, "=");
+	if (!tmp)
 		return (NULL);
-	if (index == -1)
-		return (NULL);
-	value_start = ft_strchr(envp[index], '=');
-	if (value_start != NULL && *(++value_start) != '\0')
-		return (ft_strdup(value_start));
+	while (envp[i])
+	{
+		if (ft_strncmp(tmp, envp[i], ft_strlen(tmp)) == 0)
+		{
+			free_ptr(tmp);
+			result = ft_strchr(envp[i], '=') + 1;
+			return (result);
+		}
+		i++;
+	}
+	free_ptr(tmp);
 	return (NULL);
 }
 

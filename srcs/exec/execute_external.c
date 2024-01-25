@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 23:22:29 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/24 23:31:15 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 13:36:54 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ int	execute_external(t_commands *cmds, char **envp)
 		waitpid(pid, &status, 0);
 		return (WEXITSTATUS(status));
 	}
+	return (0);
 }

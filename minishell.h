@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/24 23:44:15 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 15:46:00 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,14 @@ typedef struct s_commands
 
 typedef struct s_tokenizer
 {
-	char	**tokens;
-	char	*start;
-	char	*input;
-	char	current_quote;
-	bool	in_quote;
-	bool	error;
-	int		count;
-	int		size;
+	char		**tokens;
+	const char	*start;
+	const char	*input;
+	char		current_quote;
+	bool		in_quote;
+	bool		error;
+	int			count;
+	int			size;
 }	t_tokenizer;
 
 typedef struct s_num_parenth
@@ -118,6 +118,12 @@ extern int	g_status_code;
 
 // BUILTINS
 int			builtin_cd(char **av, char **envp);
+int			builtin_echo(char **av);
+int			builtin_env(char **envp);
+int			builtin_exit(char **av, int last_exit_status);
+int			builtin_export(char **av, char **envp);
+int			builtin_pwd(void);
+int			builtin_unset(char **av, char **envp);
 
 // EXEC
 int			execute_builtin(t_commands *cmds, char **envp, int last_exit_status);
@@ -127,13 +133,14 @@ void		execute(t_commands *cmds, char **envp, int last_exit_status);
 // ENV
 char		**copy_env(char **envp);
 int			env_var_count(char **envp);
-int			get_env_var_index(char **envp, char *var_name);
+int			get_env_var_index(char **envp, const char *var_name);
 char		*get_env_var(char **envp, char *var_name);
 int			set_env_var(char **envp, const char *name, const char *value);
 int			unset_env_var(char **envp, const char *var_name);
+char		*get_env_var_value(char **envp, char *var_name);
 
 // INIT
-bool		*init_data(t_data *data, char **envp);
+bool		init_data(t_data *data, char **envp);
 void		init_commands(t_data *data, t_commands *cmds);
 void		init_redirections(t_commands *cmds);
 void		init_pipe(t_commands *cmds);
@@ -155,6 +162,8 @@ bool		more_tokens_available(const t_tokenizer *tokenizer);
 char		current_char(const t_tokenizer *tokenizer);
 void		handle_quotes(t_tokenizer *tokenizer);
 void		handle_operators(t_tokenizer *tokenizer);
+void		handle_regular_chars(t_tokenizer *tokenizer);
+void		handle_whitespace(t_tokenizer *tokenizer);
 void		add_token(t_tokenizer *tokenizer, const char *start, int len);
 void		handle_env_variables(t_tokenizer *tokenizer);
 
@@ -199,6 +208,10 @@ void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_isdigit(int c);
 long		ft_strtol(const char *str, char **endptr, int base);
 char		*ft_strtrim(char const *s1, char const *set);
+int			ft_isalpha(int c);
+char		**ft_split(char const *s, char c);
+char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strncpy(char *dest, const char *src, unsigned int n);
 
 // SIGNALS
 void		signals_wait_cmd(void);
