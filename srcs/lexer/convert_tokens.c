@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 23:29:12 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/25 15:43:04 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:58:16 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	count_tokens(const t_tokenizer *tokenizer)
 {
-	int		num_tokens;
-	char	*start;
+	int			num_tokens;
+	const char	*start;
 
 	start = tokenizer->start;
 	num_tokens = 0;

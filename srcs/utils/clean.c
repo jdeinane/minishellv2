@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:11:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/25 17:41:18 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:47:28 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,5 +162,22 @@ void	free_data(t_data *data, bool exit_shell)
 				free_str(data->env);
 			rl_clear_history();
 		}
+	}
+}
+
+void	free_pipes(t_commands *cmds)
+{
+	int	i;
+
+	i = 0;
+	if (cmds->pipe)
+	{
+		while (i < cmds->num_exec)
+		{
+			if (cmds->pipe[i].fd)
+				free(cmds->pipe[i].fd);
+			i++;
+		}
+		free(cmds->pipe);
 	}
 }

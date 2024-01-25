@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:59:31 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/25 17:37:09 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 18:03:02 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ char		*ft_strcpy(char *dest, const char *src);
 char		*ft_strdup(const char *src);
 size_t		ft_strlen(char const *s);
 char		*ft_strndup(const char *s1, size_t n);
-int			ft_strncmp(const char *s1, const char *s2, unsigned int n);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		ft_putchar(char c);
 void		ft_putchar_fd(char c, int fd);
 void		ft_putendl_fd(char *s, int fd);
@@ -240,9 +240,8 @@ void		free_str(char **str);
 void		close_fds(t_commands *cmds, bool reset_io);
 void		free_cmds(t_commands *cmds);
 void		free_io(t_redirect *io);
-bool		is_argument(char **tokens, int token_index, t_commands *cmds);
 bool		is_redirection(char *token);
-bool		is_pipe(const char *token);
 void		free_data(t_data *data, bool exit_shell);
+void		free_pipes(t_commands *cmds);
 
 #endif

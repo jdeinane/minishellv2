@@ -6,11 +6,27 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 20:43:54 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/14 14:42:50 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:49:54 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+static bool	is_emptystring(char *str)
+{
+	int		i;
+
+	i = 0;
+	if (str == NULL)
+		return (true);
+	while (*str != '\0')
+	{
+		if (!is_space((unsigned char)*str))
+			return (false);
+		str++;
+	}
+	return (true);
+}
 
 bool	input_handler(t_data *data)
 {

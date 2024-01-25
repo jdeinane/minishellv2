@@ -6,7 +6,7 @@
 #    By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 21:59:24 by jubaldo           #+#    #+#              #
-#    Updated: 2024/01/25 17:18:15 by jubaldo          ###   ########.fr        #
+#    Updated: 2024/01/25 17:58:52 by jubaldo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS		=	srcs/builtins/cd.c 						\
 				srcs/lexer/trim_input.c					\
 				srcs/lexer/get_parsed_cmds.c			\
 				srcs/lexer/free_tokenizer.c				\
+				srcs/lexer/convert_tokens.c				\
 				srcs/main/minishell.c					\
 				srcs/main/main.c						\
 				srcs/parser/parse_input.c				\
@@ -84,6 +85,9 @@ SRCS		=	srcs/builtins/cd.c 						\
 				srcs/libft/ft_split.c					\
 				srcs/libft/ft_strncpy.c					\
 				srcs/libft/ft_putstr_fd.c				\
+				srcs/libft/ft_strtol.c					\
+				srcs/libft/ft_strjoin.c					\
+				srcs/libft/ft_memset.c					\
 
 OBJS		=	$(SRCS:.c=.o)
 

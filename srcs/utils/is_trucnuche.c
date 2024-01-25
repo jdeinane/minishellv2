@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:36:43 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/01/24 12:01:25 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:54:30 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,28 +58,10 @@ bool	is_command(char **tokens, int token_index)
 	return (false);
 }
 
-bool	is_argument(char **tokens, int token_index, t_commands *cmds)
-{
-	if (token_index == 0)
-		return (false);
-	if (is_command(tokens, token_index - 1) || is_operator(tokens[token_index - 1]))
-		return (false);
-	if (is_redirection(tokens[token_index]))
-		return (false);
-	return (true);
-}
-
 bool	is_redirection(char *token)
 {
 	if (ft_strcmp(token, ">") == 0 || ft_strcmp(token, ">>") == 0 ||
-		ft_strcmp(token, "<") == 0 || ft_strmp(token, "<<") == 0)
+		ft_strcmp(token, "<") == 0 || ft_strcmp(token, "<<") == 0)
 		return (true);
 	return (false);
-}
-
-bool	is_pipe(const char *token)
-{
-	if (token == NULL)
-		return (false);
-	return (ft_strcmp(token, "|") == 0);
 }
